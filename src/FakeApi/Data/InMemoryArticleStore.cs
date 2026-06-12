@@ -34,17 +34,11 @@ public class InMemoryArticleStore : IArticleStore
             return Array.Empty<Article>();
 
         return _allNewestFirst
-            .Where(a => a.Id != id && string.Equals(a.Category, article.Category, StringComparison.OrdinalIgnoreCase))
+            .Where(a => !string.Equals(a.Id, id, StringComparison.OrdinalIgnoreCase) && string.Equals(a.Category, article.Category, StringComparison.OrdinalIgnoreCase))
             .Take(max)
             .ToList()
             .AsReadOnly();
     }
 
-    public IReadOnlyList<string> GetCategories() =>
-        _allNewestFirst
-            .Select(a => a.Category)
-            .Distinct()
-            .OrderBy(c => c)
-            .ToList()
-            .AsReadOnly();
+    public IReadOnlyList<string> GetCategories() => Category.All;
 }

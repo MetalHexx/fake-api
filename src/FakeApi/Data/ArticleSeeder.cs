@@ -11,12 +11,11 @@ public static class ArticleSeeder
 
     public static IReadOnlyList<Article> Seed()
     {
-        Randomizer.Seed = new Random(FixedSeed);
+        var faker = new Faker { Random = new Randomizer(FixedSeed) };
         var articles = new List<Article>();
         var globalIndex = 0;
         foreach (var category in Category.All)
         {
-            var faker = new Faker { Random = new Randomizer(FixedSeed) };
             for (var i = 0; i < 6; i++)
             {
                 var headline = HeadlinePool.Next(faker, category);
