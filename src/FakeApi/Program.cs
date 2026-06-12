@@ -1,4 +1,7 @@
+using FakeApi.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IArticleStore, InMemoryArticleStore>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
