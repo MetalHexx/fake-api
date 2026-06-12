@@ -8,6 +8,7 @@ var app = builder.Build();
 app.MapGet("/", () => "Hello World!");
 app.MapFeedEndpoints();
 app.MapCategoryEndpoints();
+app.MapArticleEndpoints();
 
 app.Run();
 
